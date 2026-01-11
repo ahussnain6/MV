@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MedAI | Settings</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="docset.css">
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+   <link rel="stylesheet" href="m2.css">
+</head>
+<body>
+
+
+ <aside class="sidebar">
+  <div class="sidebar-header">
+    <img src="https://res.cloudinary.com/dlcyf2qtl/image/upload/v1761915548/Screenshot_2024-12-25_114712_yc0jrj_wsdgti.png" alt="logo" />
+    <h2>VelMed</h2>
+  </div>
+
+  <ul class="sidebar-links">
+    <h4>
+      <span>Main Menu</span>
+      <div class="menu-separator"></div>
+    </h4>
+
+    <li>
+      <a href="index.html">
+        <span class="material-symbols-outlined">grid_view</span>
+        Sign Up / Log In
+      </a>
+    </li>
+
+    <li>
+      <a href="subs.html">
+        <span class="material-symbols-outlined">chat_bubble</span>
+        Subscription Plans
+      </a>
+    </li>
+
+    <li>
+      <a href="doc.html">
+        <span class="material-symbols-outlined">description</span>
+        Medical Documents
+      </a>
+    </li>
+
+    <li>
+      <a href="upload.html">
+        <span class="material-symbols-outlined">cloud_upload</span>
+        Upload Files
+      </a>
+    </li>
+
+    <li>
+      <a href="questions.html">
+        <span class="material-symbols-outlined">cloud_upload</span>
+        Patient Questions
+      </a>
+    </li>
+
+    <li>
+      <a href="chat.html">
+        <span class="material-symbols-outlined">chat_bubble</span>
+        AI Chat Assistant
+      </a>
+    </li>
+
+    <h4>
+      <span>Doctor Panel</span>
+      <div class="menu-separator"></div>
+    </h4>
+
+    <li>
+      <a href="docset.html">
+        <span class="material-symbols-outlined">settings_applications</span>
+        Doctor Settings
+      </a>
+    </li>
+
+    <li>
+      <a href="docval.html">
+        <span class="material-symbols-outlined">verified</span>
+        Upload Treatment/Protocols
+      </a>
+    </li>
+
+    <li>
+      <a href="dash.html">
+        <span class="material-symbols-outlined">verified</span>
+        Doctor Dashboard
+      </a>
+    </li>
+
+    <li>
+      <a href="docchat.html">
+        <span class="material-symbols-outlined">verified</span>
+        AI Patient Simulation
+      </a>
+    </li>
+  </ul>
+</aside>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="app-container main-content">
+
+  <!-- LEFT COLUMN -->
+  <div class="column">
+
+    <!-- PROFILE SETTINGS -->
+    <div class="card">
+      <h3>Profile Settings</h3>
+
+      <div class="profile-header">
+        <div class="avatar">
+          <img src="https://i.pravatar.cc/150?img=47" alt="Doctor">
+          <button class="edit-avatar">✎</button>
+        </div>
+        <button class="remove-photo">Remove photo</button>
+      </div>
+
+      <div class="form-grid">
+        <div>
+          <label>First Name</label>
+          <input type="text" value="Clara">
+        </div>
+        <div>
+          <label>Last Name</label>
+          <input type="text" value="Redfield">
+        </div>
+        <div>
+          <label>Prefix Title</label>
+          <input type="text" value="Dr.">
+        </div>
+        <div>
+          <label>Suffix Title</label>
+          <input type="text" placeholder="MD, PhD">
+        </div>
+        <div>
+          <label>Role</label>
+          <select>
+            <option>General Practitioner (GP)</option>
+            <option>Cardiologist</option>
+            <option>Dermatologist</option>
+          </select>
+        </div>
+        <div>
+          <label>Phone Number</label>
+          <input type="text" value="+62 8125 7789 655">
+          <span class="verified">✔ Verified</span>
+        </div>
+        <div class="full">
+          <label>Email</label>
+          <input type="email" value="clara.redfield@gmail.com" disabled>
+          <button class="text-btn">Change Email</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ACCOUNT & SECURITY -->
+    <div class="card">
+      <h3>Account & Security</h3>
+
+      <div class="row">
+        <span>Password</span>
+        <button class="outline-btn">Change Password</button>
+      </div>
+
+      <div class="row">
+        <span>Manage Logged Devices</span>
+        <a href="#" class="link">View all active logins</a>
+      </div>
+
+      <div class="row">
+        <span>Two-Factor Authentication (2FA)</span>
+        <label class="switch">
+          <input type="checkbox">
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <div class="row">
+        <span>Login Alerts</span>
+        <label class="switch">
+          <input type="checkbox" checked>
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <div class="footer-actions">
+        <button class="text-btn">Cancel</button>
+        <button class="primary-btn">Save Changes</button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- RIGHT COLUMN -->
+  <div class="column">
+
+    <!-- NOTIFICATIONS -->
+    <div class="card">
+      <h3>Notification Settings</h3>
+
+      <div class="row">
+        <span>Notification Channels <small>Email & SMS</small></span>
+        <label class="switch">
+          <input type="checkbox" checked>
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <div class="row">
+        <span>Appointments</span>
+        <label class="switch">
+          <input type="checkbox">
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <div class="row">
+        <span>Consultation</span>
+        <label class="switch">
+          <input type="checkbox" checked>
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <div class="row">
+        <span>Test Result</span>
+        <label class="switch">
+          <input type="checkbox" checked>
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <div class="row">
+        <span>Login Alerts</span>
+        <label class="switch">
+          <input type="checkbox" checked>
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <div class="row">
+        <span>Do Not Disturb</span>
+        <label class="switch">
+          <input type="checkbox">
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <div class="time-row">
+        <div>
+          <label>From</label>
+          <input type="time" value="22:00">
+        </div>
+        <div>
+          <label>To</label>
+          <input type="time" value="07:00">
+        </div>
+      </div>
+    </div>
+
+    <!-- DATA & PRIVACY -->
+    <div class="card">
+      <h3>Data & Privacy</h3>
+
+      <div class="member-row">
+        <span>Zaza Gonzales <small>Assistant</small></span>
+        <select>
+          <option>Full Access</option>
+          <option>View Only</option>
+        </select>
+      </div>
+
+      <div class="member-row">
+        <span>Grace White <small>Nurse</small></span>
+        <select>
+          <option>View Only</option>
+          <option>Full Access</option>
+        </select>
+      </div>
+
+      <div class="member-row">
+        <span>Freddy Ulric <small>Nurse</small></span>
+        <select>
+          <option>View Only</option>
+          <option>Full Access</option>
+        </select>
+      </div>
+
+      <button class="outline-btn full">+ Add Member</button>
+
+      <div class="row">
+        <span>Enable Activity Log</span>
+        <label class="switch">
+          <input type="checkbox" checked>
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <div class="row">
+        <span>Export Medical Records Format</span>
+        <select>
+          <option>PDF</option>
+          <option>CSV</option>
+        </select>
+      </div>
+
+      <div class="legal">
+        <a href="#">Privacy Policy</a> • <a href="#">Terms</a>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+document.querySelectorAll(".switch input").forEach(toggle => {
+  toggle.addEventListener("change", () => {
+    console.log("Setting changed:", toggle.checked);
+  });
+});
+
+document.querySelector(".primary-btn").addEventListener("click", () => {
+  alert("Settings saved successfully!");
+});
+</script>
+</body>
+</html>

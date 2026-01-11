@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MedAI | Upload Documents</title>
+   <link rel="stylesheet" href="m2.css">
+   <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  <link rel="stylesheet" href="upload.css">
+</head>
+<body>
+
+ <aside class="sidebar">
+  <div class="sidebar-header">
+    <img src="https://res.cloudinary.com/dlcyf2qtl/image/upload/v1761915548/Screenshot_2024-12-25_114712_yc0jrj_wsdgti.png" alt="logo" />
+    <h2>VelMed</h2>
+  </div>
+
+  <ul class="sidebar-links">
+    <h4>
+      <span>Main Menu</span>
+      <div class="menu-separator"></div>
+    </h4>
+
+    <li>
+      <a href="index.html">
+        <span class="material-symbols-outlined">grid_view</span>
+        Sign Up / Log In
+      </a>
+    </li>
+
+    <li>
+      <a href="subs.html">
+        <span class="material-symbols-outlined">chat_bubble</span>
+        Subscription Plans
+      </a>
+    </li>
+
+    <li>
+      <a href="doc.html">
+        <span class="material-symbols-outlined">description</span>
+        Medical Documents
+      </a>
+    </li>
+
+    <li>
+      <a href="upload.html">
+        <span class="material-symbols-outlined">cloud_upload</span>
+        Upload Files
+      </a>
+    </li>
+
+    <li>
+      <a href="questions.html">
+        <span class="material-symbols-outlined">cloud_upload</span>
+        Patient Questions
+      </a>
+    </li>
+
+    <li>
+      <a href="chat.html">
+        <span class="material-symbols-outlined">chat_bubble</span>
+        AI Chat Assistant
+      </a>
+    </li>
+
+    <h4>
+      <span>Doctor Panel</span>
+      <div class="menu-separator"></div>
+    </h4>
+
+    <li>
+      <a href="docset.html">
+        <span class="material-symbols-outlined">settings_applications</span>
+        Doctor Settings
+      </a>
+    </li>
+
+    <li>
+      <a href="docval.html">
+        <span class="material-symbols-outlined">verified</span>
+        Upload Treatment/Protocols
+      </a>
+    </li>
+
+    <li>
+      <a href="dash.html">
+        <span class="material-symbols-outlined">verified</span>
+        Doctor Dashboard
+      </a>
+    </li>
+
+    <li>
+      <a href="docchat.html">
+        <span class="material-symbols-outlined">verified</span>
+        AI Patient Simulation
+      </a>
+    </li>
+  </ul>
+</aside>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class="upload-container main-content">
+    <div class="upload-card">
+      <h2>Upload Your Medical Documents</h2>
+      <p>Please upload your PDF documents for consultation. Max size: 10MB</p>
+
+      <!-- Drag & Drop -->
+      <div id="dropZone" class="drop-zone">
+        <p>Drag & Drop PDF here or click to upload</p>
+        <input type="file" id="fileInput" accept="application/pdf" hidden>
+      </div>
+
+      <!-- File Preview -->
+      <div id="filePreview" class="file-preview"></div>
+
+      <!-- Progress -->
+      <progress id="uploadProgress" value="0" max="100" hidden></progress>
+
+      <button id="continueBtn" class="btn-primary" disabled>Continue to Questions</button>
+    </div>
+  </div>
+
+  <script>
+ 
+
+  
+  const dropZone = document.getElementById("dropZone");
+const fileInput = document.getElementById("fileInput");
+const filePreview = document.getElementById("filePreview");
+const uploadProgress = document.getElementById("uploadProgress");
+const continueBtn = document.getElementById("continueBtn");
+
+let selectedFile = null;
+
+// Click to open file dialog
+dropZone.addEventListener("click", () => fileInput.click());
+
+// Drag & Drop Visual Feedback
+dropZone.addEventListener("dragover", e => {
+  e.preventDefault();
+  dropZone.classList.add("dragover");
+});
+dropZone.addEventListener("dragleave", e => {
+  e.preventDefault();
+  dropZone.classList.remove("dragover");
+});
+
+// Handle file selection
+fileInput.addEventListener("change", handleFile);
+dropZone.addEventListener("drop", e => {
+  e.preventDefault();
+  dropZone.classList.remove("dragover");
+  if(e.dataTransfer.files.length) handleFile({ target: { files: e.dataTransfer.files }});
+});
+
+function handleFile(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+  if (file.type !== "application/pdf") {
+    alert("Only PDF files are allowed!");
+    return;
+  }
+  if (file.size > 10 * 1024 * 1024) { // 10MB
+    alert("File exceeds 10MB limit!");
+    return;
+  }
+
+  selectedFile = file;
+  filePreview.innerHTML = `<p><strong>Selected:</strong> ${file.name} (${(file.size/1024/1024).toFixed(2)} MB)</p>`;
+  uploadProgress.hidden = false;
+  continueBtn.disabled = true;
+
+  // Simulate upload
+  let progress = 0;
+  const interval = setInterval(() => {
+    progress += 20;
+    uploadProgress.value = progress;
+    if(progress >= 100){
+      clearInterval(interval);
+      continueBtn.disabled = false;
+    }
+  }, 200);
+}
+
+// Continue to Questions
+ continueBtn.addEventListener("click", () => {
+  if(!selectedFile) return alert("Please select a PDF file.");
+
+  const params = new URLSearchParams(window.location.search);
+  let selectedDoctor = null;
+
+  try {
+    selectedDoctor = JSON.parse(decodeURIComponent(params.get("doctor")));
+  } catch(err) {
+    console.error("Invalid doctor data in URL", err);
+  }
+
+  if (!selectedDoctor) {
+    alert("Doctor info missing. Redirecting...");
+    window.location.href = "doc.html";
+  } else {
+    const doctorData = encodeURIComponent(JSON.stringify(selectedDoctor));
+    window.location.href = `questions.html?doctor=${doctorData}`;
+  }
+});
+
+  
+  </script>
+</body>
+</html>

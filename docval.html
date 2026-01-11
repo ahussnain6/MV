@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MedAI | Prescription Upload</title>
+
+  <!-- Google Fonts & Material Icons -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+  <link rel="stylesheet" href="docval.css">
+    <link rel="stylesheet" href="m2.css">
+</head>  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <aside class="sidebar">
+  <div class="sidebar-header">
+    <img src="https://res.cloudinary.com/dlcyf2qtl/image/upload/v1761915548/Screenshot_2024-12-25_114712_yc0jrj_wsdgti.png" alt="logo" />
+    <h2>VelMed</h2>
+  </div>
+
+  <ul class="sidebar-links">
+    <h4>
+      <span>Main Menu</span>
+      <div class="menu-separator"></div>
+    </h4>
+
+    <li>
+      <a href="index.html">
+        <span class="material-symbols-outlined">grid_view</span>
+        Sign Up / Log In
+      </a>
+    </li>
+
+    <li>
+      <a href="subs.html">
+        <span class="material-symbols-outlined">chat_bubble</span>
+        Subscription Plans
+      </a>
+    </li>
+
+    <li>
+      <a href="doc.html">
+        <span class="material-symbols-outlined">description</span>
+        Medical Documents
+      </a>
+    </li>
+
+    <li>
+      <a href="upload.html">
+        <span class="material-symbols-outlined">cloud_upload</span>
+        Upload Files
+      </a>
+    </li>
+
+    <li>
+      <a href="questions.html">
+        <span class="material-symbols-outlined">cloud_upload</span>
+        Patient Questions
+      </a>
+    </li>
+
+    <li>
+      <a href="chat.html">
+        <span class="material-symbols-outlined">chat_bubble</span>
+        AI Chat Assistant
+      </a>
+    </li>
+
+    <h4>
+      <span>Doctor Panel</span>
+      <div class="menu-separator"></div>
+    </h4>
+
+    <li>
+      <a href="docset.html">
+        <span class="material-symbols-outlined">settings_applications</span>
+        Doctor Settings
+      </a>
+    </li>
+
+    <li>
+      <a href="docval.html">
+        <span class="material-symbols-outlined">verified</span>
+        Upload Treatment/Protocols
+      </a>
+    </li>
+
+    <li>
+      <a href="dash.html">
+        <span class="material-symbols-outlined">verified</span>
+        Doctor Dashboard
+      </a>
+    </li>
+
+    <li>
+      <a href="docchat.html">
+        <span class="material-symbols-outlined">verified</span>
+        AI Patient Simulation
+      </a>
+    </li>
+  </ul>
+</aside>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!-- Main Content -->
+  <main class="main-content">
+
+    <header>
+      <h1>Prescription Upload & Scenario Input</h1>
+      <div class="user-info">
+        <span>Dr. Smith</span>
+        <img src="https://i.pravatar.cc/40" alt="User Avatar">
+      </div>
+    </header>
+
+    <!-- File Upload -->
+    <section class="upload-section">
+      <h2>Upload Doctor Prescriptions/Protocols</h2>
+      <p>Upload scanned documents or PDF prescriptions for AI learning.</p>
+      <input type="file" id="prescriptionUpload" multiple />
+      <div id="uploadedFiles"></div>
+    </section>
+
+    <!-- Dynamic Scenario Input -->
+    <section class="scenario-section">
+      <h2>Input Conditions / Scenarios</h2>
+      <p>Fill in multiple patient scenarios and AI recommendations.</p>
+
+      <button id="addScenarioBtn" class="btn-primary">Add Scenario</button>
+
+      <form id="scenarioForm">
+        <div id="scenariosContainer"></div>
+        <button type="submit" class="btn-primary">Submit to AI</button>
+      </form>
+    </section>
+
+  </main>
+
+  <script>
+  
+  
+  const uploadedFilesDiv = document.getElementById("uploadedFiles");
+const prescriptionUpload = document.getElementById("prescriptionUpload");
+const scenariosContainer = document.getElementById("scenariosContainer");
+const addScenarioBtn = document.getElementById("addScenarioBtn");
+const scenarioForm = document.getElementById("scenarioForm");
+
+// Handle file uploads
+prescriptionUpload.addEventListener("change", (e)=>{
+  uploadedFilesDiv.innerHTML = "";
+  for(const file of e.target.files){
+    const p = document.createElement("p");
+    p.textContent = `Uploaded: ${file.name}`;
+    uploadedFilesDiv.appendChild(p);
+  }
+});
+
+// Add scenario row
+let scenarioCount = 0;
+function addScenario(){
+  if(scenarioCount>=50){
+    alert("Max 50 scenarios allowed");
+    return;
+  }
+  scenarioCount++;
+  const row = document.createElement("div");
+  row.className = "scenario-row";
+  row.innerHTML = `
+    <input type="text" name="condition${scenarioCount}" placeholder="Condition / Situation ${scenarioCount}" required />
+    <textarea name="problem${scenarioCount}" placeholder="Problem Description" required></textarea>
+    <textarea name="pain${scenarioCount}" placeholder="Pain / Diagnosis" required></textarea>
+    <input type="text" name="duration${scenarioCount}" placeholder="Pain Duration" required />
+    <input type="text" name="satisfaction${scenarioCount}" placeholder="Patient Satisfaction %" required />
+    <textarea name="recommendation${scenarioCount}" placeholder="AI Recommendation" required></textarea>
+    <button type="button" class="btn-remove">Remove</button>
+  `;
+  scenariosContainer.appendChild(row);
+
+  // Remove button
+  row.querySelector(".btn-remove").addEventListener("click", ()=>{
+    scenariosContainer.removeChild(row);
+    scenarioCount--;
+  });
+}
+
+// Add initial scenario
+for(let i=0;i<5;i++) addScenario();
+
+// Add new scenario on button click
+addScenarioBtn.addEventListener("click", addScenario);
+
+// Submit form
+scenarioForm.addEventListener("submit", (e)=>{
+  e.preventDefault();
+  const formData = new FormData(scenarioForm);
+  const scenarios = [];
+
+  for(let i=1;i<=scenarioCount;i++){
+    scenarios.push({
+      condition: formData.get(`condition${i}`),
+      problem: formData.get(`problem${i}`),
+      pain: formData.get(`pain${i}`),
+      duration: formData.get(`duration${i}`),
+      satisfaction: formData.get(`satisfaction${i}`),
+      recommendation: formData.get(`recommendation${i}`)
+    });
+  }
+
+  console.log("Submitted scenarios:", scenarios);
+  alert("Scenarios submitted! Check console for output.");
+  scenarioForm.reset();
+  scenariosContainer.innerHTML="";
+  scenarioCount=0;
+  for(let i=0;i<5;i++) addScenario();
+});
+
+  
+  </script>
+</body>
+</html>

@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MedAI | AI Consultation</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="chat.css">
+  <link rel="stylesheet" href="m2.css">
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+</head>
+<body>
+
+
+<aside class="sidebar">
+  <div class="sidebar-header">
+    <img src="https://res.cloudinary.com/dlcyf2qtl/image/upload/v1761915548/Screenshot_2024-12-25_114712_yc0jrj_wsdgti.png" alt="logo" />
+    <h2>VelMed</h2>
+  </div>
+
+  <ul class="sidebar-links">
+    <h4>
+      <span>Main Menu</span>
+      <div class="menu-separator"></div>
+    </h4>
+
+    <li>
+      <a href="index.html">
+        <span class="material-symbols-outlined">grid_view</span>
+        Sign Up / Log In
+      </a>
+    </li>
+
+    <li>
+      <a href="subs.html">
+        <span class="material-symbols-outlined">chat_bubble</span>
+        Subscription Plans
+      </a>
+    </li>
+
+    <li>
+      <a href="doc.html">
+        <span class="material-symbols-outlined">description</span>
+        Medical Documents
+      </a>
+    </li>
+
+    <li>
+      <a href="upload.html">
+        <span class="material-symbols-outlined">cloud_upload</span>
+        Upload Files
+      </a>
+    </li>
+
+    <li>
+      <a href="questions.html">
+        <span class="material-symbols-outlined">cloud_upload</span>
+        Patient Questions
+      </a>
+    </li>
+
+    <li>
+      <a href="chat.html">
+        <span class="material-symbols-outlined">chat_bubble</span>
+        AI Chat Assistant
+      </a>
+    </li>
+
+    <h4>
+      <span>Doctor Panel</span>
+      <div class="menu-separator"></div>
+    </h4>
+
+    <li>
+      <a href="docset.html">
+        <span class="material-symbols-outlined">settings_applications</span>
+        Doctor Settings
+      </a>
+    </li>
+
+    <li>
+      <a href="docval.html">
+        <span class="material-symbols-outlined">verified</span>
+        Upload Treatment/Protocols
+      </a>
+    </li>
+
+    <li>
+      <a href="dash.html">
+        <span class="material-symbols-outlined">verified</span>
+        Doctor Dashboard
+      </a>
+    </li>
+
+    <li>
+      <a href="docchat.html">
+        <span class="material-symbols-outlined">verified</span>
+        AI Patient Simulation
+      </a>
+    </li>
+  </ul>
+</aside>
+
+
+
+
+
+
+<div class="chat-app main-content">
+
+  <!-- Sidebar / Doctor Profile -->
+  <aside class="doctor-panel">
+    <img id="doctorImg" src="https://i.pravatar.cc/150?img=12" alt="Doctor">
+    <h3 id="doctorName">Dr. Smith</h3>
+    <p id="doctorSpec">Cardiology Specialist</p>
+    <span class="status">🟢 AI Training Session Active</span>
+  </aside>
+
+  <!-- Main Chat Area -->
+  <main class="chat-container">
+
+    <!-- Header -->
+    <header class="chat-header">
+      <h2>AI Patient Simulation</h2>
+      <p>AI behaves as a patient to learn diagnosis, treatment & prescriptions</p>
+    </header>
+
+    <!-- Scenario Info -->
+    <section class="scenario-bar">
+      <strong>Active Scenario:</strong>
+      <span id="scenarioTitle">Chest Pain & Shortness of Breath</span>
+    </section>
+
+    <!-- Messages -->
+    <section id="chatBox" class="chat-box">
+      <!-- AI (Patient) Message -->
+      <div class="message ai">
+        <p><strong>AI Patient:</strong> Doctor, I’ve been having chest pain for the last 3 days, especially while walking. What should I do?</p>
+      </div>
+
+      <!-- Doctor Message -->
+      <div class="message doctor">
+        <p><strong>You (Doctor):</strong> Can you describe the pain? Is it sharp or heavy?</p>
+      </div>
+    </section>
+
+    <!-- Input -->
+    <footer class="chat-input">
+      <input type="text" id="chatInput" placeholder="Type your clinical response or prescription..." />
+      <button id="sendBtn">Send to AI</button>
+    </footer>
+
+  </main>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+
+ 
+
+// Populate doctor info
+document.getElementById("doctorName").textContent = doctor.name || "Sr. Helen";
+document.getElementById("doctorSpec").textContent = doctor.specialty || "General Practioner";
+document.getElementById("doctorImg").src = doctor.img || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScZRgcK5yBqagQ1PAp3DVhiDd93NcXTHIvAA&s";
+
+// Chat elements
+const chatBox = document.getElementById("chatBox");
+const input = document.getElementById("chatInput");
+const sendBtn = document.getElementById("sendBtn");
+
+// Initial AI greeting
+appendMessage("bot", `Hello, I am your AI assistant on behalf of ${doctor.name}.  
+I’ve carefully reviewed your responses and will guide you based on your ${doctor.specialty} concerns.
+
+To better understand your condition, I’d like to ask a few quick questions:
+1. Can you describe the main symptoms you are currently experiencing?
+2. When did these symptoms first begin, and have they changed over time?
+3. Are these symptoms affecting your daily activities or sleep?
+4. Are you currently taking any medications or receiving treatment related to this issue?
+5. Is there anything specific you are most worried about regarding your condition?
+
+Please answer in as much detail as you feel comfortable sharing.`);
+
+// Send message
+sendBtn.addEventListener("click", sendMessage);
+input.addEventListener("keypress", e => {
+  if (e.key === "Enter") sendMessage();
+});
+
+function sendMessage() {
+  const msg = input.value.trim();
+  if (!msg) return;
+
+  appendMessage("user", msg);
+  input.value = "";
+
+  setTimeout(() => {
+    appendMessage("bot", generateAIResponse(msg));
+  }, 800);
+}
+
+// Append chat message
+function appendMessage(type, text) {
+  const div = document.createElement("div");
+  div.className = `message ${type}`;
+  div.textContent = text;
+  chatBox.appendChild(div);
+  chatBox.scrollTop = chatBox.scrollHeight;
+}
+
+// AI Logic (Simulated)
+function generateAIResponse(userMsg) {
+  const base = `Based on your previous answers (${answers.join(" | ")}), from a ${doctor.specialty} perspective: `;
+
+  if (userMsg.toLowerCase().includes("pain")) {
+    return base + "persistent pain should be clinically evaluated. I recommend scheduling an in-person diagnostic assessment.";
+  }
+
+  if (userMsg.toLowerCase().includes("medicine") || userMsg.toLowerCase().includes("medication")) {
+    return base + "medication plans must be customized. Avoid self-prescribing and follow professional medical guidance.";
+  }
+
+  return base + "your symptoms suggest further observation. Please continue sharing any discomfort or medical history for better guidance.";
+}
+
+
+
+</script>
+</body>
+</html>

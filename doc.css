@@ -1,0 +1,86 @@
+/* Doctor Selection Page */
+.doctor-container {
+  max-width: 1200px;
+  margin: 30px auto;
+  padding: 0 20px;
+}
+
+.doctor-container h2 {
+  color: #1e3c72;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.doctor-filters {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 25px;
+}
+
+.doctor-filters input,
+.doctor-filters select {
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  width: 200px;
+  transition: 0.3s;
+}
+
+.doctor-filters input:focus,
+.doctor-filters select:focus {
+  border-color: #1e3c72;
+  outline: none;
+  box-shadow: 0 0 5px rgba(30,60,114,0.3);
+}
+
+.doctor-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.doctor-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  overflow: hidden;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.doctor-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+}
+
+.doctor-card img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
+
+.doctor-card .doctor-info {
+  padding: 15px;
+}
+
+.doctor-card h4 {
+  margin-bottom: 5px;
+  color: #1e3c72;
+}
+
+.doctor-card p {
+  margin-bottom: 8px;
+  color: #555;
+  font-size: 0.9rem;
+}
+
+.rating {
+  color: #f39c12;
+}
+
+.consult-fee {
+  font-weight: 600;
+  color: #1e3c72;
+}
